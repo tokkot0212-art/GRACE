@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>美容室GRACE｜富谷市成田の完全個室プライベートサロン</title>
+<meta name="description" content="宮城県富谷市成田の美容室GRACE。完全個室・マンツーマンで、他のお客様と顔を合わせない“あなただけの空間”。ネット予約受付中。PayPay・クレジットカード・現金対応。">
+<meta property="og:title" content="美容室GRACE｜あなただけの、ひとりの時間">
+<meta property="og:description" content="完全個室・マンツーマンのプライベートサロン。富谷市成田、ユートミヤのすぐ近く。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#3b2a24">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f2ec; --paper:#fffdfa; --ink:#2e2420; --sub:#7a6b63; --line:#e6dbd0;
+  --cocoa:#3b2a24; --rose:#b0645a; --rose-soft:#f3e3de; --gold:#b89a6a; --ok:#4f7d5c;
+  --radius:18px; --shadow:0 10px 30px rgba(59,42,36,.08);
+  color-scheme: light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New",system-ui,sans-serif;line-height:1.85;font-size:15.5px;padding-bottom:84px}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.en{font-family:"Cormorant Garamond",serif;letter-spacing:.08em}
+.min{font-family:"Shippori Mincho",serif}
+h2.sec{font-family:"Shippori Mincho",serif;font-size:clamp(22px,4.6vw,30px);font-weight:600;text-align:center;line-height:1.5}
+.sec-en{display:block;text-align:center;font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--rose);letter-spacing:.2em;font-size:15px;margin-bottom:4px}
+section{padding:72px 0}
+.lead{color:var(--sub);text-align:center;max-width:560px;margin:14px auto 0}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(247,242,236,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+header.scrolled{border-color:var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:baseline;gap:8px;text-decoration:none}
+.logo b{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:600;letter-spacing:.18em;color:var(--cocoa)}
+.logo small{font-size:11px;color:var(--sub);letter-spacing:.1em}
+nav.pc{display:none;gap:26px;font-size:14px}
+nav.pc a{text-decoration:none;color:var(--sub)}
+nav.pc a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:999px;padding:13px 26px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .15s,opacity .2s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn-main{background:var(--cocoa);color:#fff}
+.btn-main:hover{background:#2a1d18}
+.btn-ghost{background:transparent;color:var(--cocoa);border:1.5px solid var(--cocoa)}
+.btn-sm{padding:8px 18px;font-size:14px}
+@media(min-width:820px){nav.pc{display:flex}}
+
+/* hero */
+.hero{padding:40px 0 64px;overflow:hidden}
+.hero-grid{display:grid;gap:36px;align-items:center}
+@media(min-width:820px){.hero-grid{grid-template-columns:1.1fr 1fr}.hero{padding:80px 0}}
+.badge{display:inline-flex;gap:8px;align-items:center;background:var(--rose-soft);color:var(--rose);font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:999px;letter-spacing:.05em}
+.hero h1{font-family:"Shippori Mincho",serif;font-weight:600;font-size:clamp(30px,7.4vw,48px);line-height:1.45;margin:18px 0 16px}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--rose-soft) 62%)}
+.hero p{color:var(--sub);max-width:460px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.open-now{margin-top:18px;font-size:13.5px;color:var(--sub);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:#bbb}
+.dot.on{background:var(--ok);box-shadow:0 0 0 4px rgba(79,125,92,.15)}
+.hero-art{position:relative;aspect-ratio:4/5;max-width:420px;width:100%;margin:0 auto;border-radius:200px 200px 24px 24px;background:linear-gradient(160deg,#4a362e 0%,#2e211c 100%);box-shadow:var(--shadow);overflow:hidden;display:grid;place-items:center}
+.hero-art .mark{font-family:"Cormorant Garamond",serif;color:#f5ece3;font-size:clamp(56px,14vw,84px);letter-spacing:.2em;font-weight:600;padding-left:.2em}
+.hero-art .tag{position:absolute;bottom:34px;left:0;right:0;text-align:center;color:#d9c7b5;font-family:"Cormorant Garamond",serif;font-style:italic;letter-spacing:.12em;font-size:15px}
+.hero-art .arch{position:absolute;inset:18px;border:1px solid rgba(232,215,196,.3);border-radius:190px 190px 14px 14px}
+.hero-art .light{position:absolute;top:-30%;right:-30%;width:80%;height:80%;background:radial-gradient(circle,rgba(255,226,196,.22),transparent 65%)}
+
+/* concept */
+.points{display:grid;gap:16px;margin-top:40px}
+@media(min-width:760px){.points{grid-template-columns:repeat(3,1fr)}}
+.point{background:var(--paper);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow)}
+.point .num{font-family:"Cormorant Garamond",serif;color:var(--gold);font-size:30px;line-height:1}
+.point h3{font-family:"Shippori Mincho",serif;font-size:19px;margin:10px 0 6px}
+.point p{color:var(--sub);font-size:14.5px}
+.quote{margin:44px auto 0;max-width:620px;text-align:center;font-family:"Shippori Mincho",serif;font-size:clamp(17px,3.8vw,21px);line-height:2;color:var(--cocoa)}
+
+/* menu */
+.menu-list{max-width:680px;margin:36px auto 0;background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:8px 24px}
+.mi{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px dashed var(--line)}
+.mi:last-child{border:none}
+.mi h4{font-size:16px;font-weight:700}
+.mi p{font-size:13px;color:var(--sub);line-height:1.6;margin-top:2px}
+.mi .pr{white-space:nowrap;font-weight:700;color:var(--cocoa);text-align:right}
+.mi .pr small{display:block;font-weight:400;color:var(--sub);font-size:12px}
+.note{font-size:12.5px;color:var(--sub);text-align:center;margin-top:14px}
+
+/* booking */
+#reserve{background:var(--paper)}
+.bk{max-width:680px;margin:32px auto 0}
+.steps{display:flex;gap:6px;margin-bottom:22px}
+.steps span{flex:1;height:4px;border-radius:4px;background:var(--line);transition:background .3s}
+.steps span.on{background:var(--rose)}
+.panel h3{font-size:17px;font-weight:700;margin-bottom:14px}
+.panel h3 small{font-weight:400;color:var(--sub);font-size:13px;margin-left:6px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 18px;border:1.5px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--gold)}
+.opt.sel{border-color:var(--rose);background:var(--rose-soft)}
+.opt b{font-size:15px}
+.opt small{color:var(--sub);font-size:12.5px;display:block}
+.days{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.day{flex:0 0 62px;scroll-snap-align:start;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:8px 0;text-align:center;cursor:pointer;font:inherit;color:inherit}
+.day .w{font-size:11.5px;color:var(--sub)}
+.day .d{font-size:20px;font-weight:700;line-height:1.3}
+.day .m{font-size:11px;color:var(--sub)}
+.day.sun .w{color:#c0504d}.day.sat .w{color:#4a6fa5}
+.day.sel{border-color:var(--rose);background:var(--rose-soft)}
+.day:disabled{opacity:.35;cursor:not-allowed}
+.day:disabled .d{text-decoration:line-through}
+.times{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px;margin-top:8px}
+.time{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 0;font:inherit;font-weight:700;cursor:pointer;color:inherit}
+.time.sel{border-color:var(--rose);background:var(--rose);color:#fff}
+.time:disabled{opacity:.3;cursor:not-allowed}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13.5px;font-weight:700;margin-bottom:6px}
+.field label .req{color:var(--rose);font-size:11px;margin-left:6px}
+.field input,.field textarea,.field select{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--rose)}
+.nav-row{display:flex;gap:10px;margin-top:22px}
+.nav-row .btn{flex:1}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.summary{background:var(--bg);border-radius:14px;padding:18px 20px;font-size:14.5px}
+.summary dl{display:grid;grid-template-columns:88px 1fr;gap:6px 10px}
+.summary dt{color:var(--sub)}
+.send{display:grid;gap:10px;margin-top:18px}
+.done{text-align:center;padding:20px 0}
+.done .ic{width:56px;height:56px;border-radius:50%;background:var(--rose-soft);color:var(--rose);display:grid;place-items:center;margin:0 auto 12px;font-size:26px}
+.hint{font-size:12.5px;color:var(--sub);margin-top:10px;line-height:1.7}
+.hidden{display:none!important}
+
+/* tips */
+.today-tip{max-width:680px;margin:30px auto 0;background:var(--cocoa);color:#f5ece3;border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
+.today-tip .lbl{font-family:"Cormorant Garamond",serif;font-style:italic;letter-spacing:.14em;color:var(--gold);font-size:14px}
+.today-tip h3{font-family:"Shippori Mincho",serif;font-size:19px;margin:6px 0 8px}
+.today-tip p{font-size:14.5px;color:#e3d5c7}
+.tabs{display:flex;justify-content:center;gap:8px;margin:34px 0 18px}
+.tab{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 22px;font:inherit;font-weight:700;cursor:pointer;color:var(--sub)}
+.tab.on{background:var(--cocoa);border-color:var(--cocoa);color:#fff}
+.tips{display:grid;gap:12px;max-width:680px;margin:0 auto}
+details.tip{background:var(--paper);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+details.tip summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;gap:14px;align-items:center;font-weight:700}
+details.tip summary::-webkit-details-marker{display:none}
+details.tip summary .ico{flex:0 0 38px;height:38px;border-radius:12px;background:var(--rose-soft);display:grid;place-items:center;font-size:18px}
+details.tip summary .chev{margin-left:auto;transition:transform .25s;color:var(--sub)}
+details.tip[open] summary .chev{transform:rotate(180deg)}
+details.tip .body{padding:0 20px 20px 72px;color:var(--sub);font-size:14.5px}
+
+/* pay */
+.pays{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:620px;margin:32px auto 0}
+.pay{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 8px;text-align:center}
+.pay .pi{width:48px;height:48px;margin:0 auto 10px;border-radius:14px;display:grid;place-items:center}
+.pay b{font-size:14px;display:block}
+.pay small{font-size:11.5px;color:var(--sub)}
+
+/* access */
+.acc{display:grid;gap:22px;margin-top:36px}
+@media(min-width:820px){.acc{grid-template-columns:1fr 1fr}}
+.info{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.info dl{display:grid;grid-template-columns:76px 1fr;gap:12px 12px;font-size:14.5px}
+.info dt{color:var(--sub)}
+.info a{color:var(--rose)}
+.map{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);min-height:280px;background:#e9e1d8}
+.map iframe{width:100%;height:100%;min-height:280px;border:0;display:block}
+
+/* utomiya */
+.uto{background:linear-gradient(180deg,var(--bg),#efe5da)}
+.uto-card{max-width:760px;margin:32px auto 0;background:var(--paper);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;display:grid}
+@media(min-width:760px){.uto-card{grid-template-columns:220px 1fr}}
+.uto-art{background:#f1ddd2;display:grid;place-items:center;padding:28px;min-height:160px}
+.uto-body{padding:26px}
+.uto-body h3{font-family:"Shippori Mincho",serif;font-size:20px}
+.uto-body .sm{font-size:12.5px;color:var(--sub)}
+.uto-body ul{list-style:none;margin:14px 0;display:grid;gap:8px;font-size:14.5px}
+.uto-body li{display:flex;gap:10px}
+.uto-body li span{flex:0 0 22px}
+
+/* footer & sticky */
+footer{background:var(--cocoa);color:#d9c7b5;text-align:center;padding:44px 20px 30px;font-size:13px}
+footer .en{font-size:30px;color:#f5ece3;letter-spacing:.2em}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,253,250,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;gap:10px;transition:transform .3s}
+.sticky.hide{transform:translateY(110%)}
+.sticky .btn{flex:1;padding:13px 10px}
+.sticky .btn-ghost{flex:0 0 auto;padding:13px 18px}
+@media(min-width:820px){.sticky{display:none}body{padding-bottom:0}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap hd">
+    <a href="#top" class="logo"><b>GRACE</b><small>美容室グレース</small></a>
+    <nav class="pc">
+      <a href="#concept">コンセプト</a><a href="#menu">メニュー</a><a href="#tips">ケア情報</a><a href="#access">アクセス</a>
+    </nav>
+    <a href="#reserve" class="btn btn-main btn-sm">予約する</a>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <span class="badge">完全個室 ・ マンツーマン</span>
+      <h1>他のお客様はいません。<br><em>あなただけの、</em><br>ひとりの時間。</h1>
+      <p>富谷市成田の小さなプライベートサロン。ご予約は一枠ずつ、お迎えするのはいつもお一人だけ。まわりを気にせず、ゆっくり髪とご自分に向き合える場所です。</p>
+      <div class="hero-cta">
+        <a href="#reserve" class="btn btn-main">ネットで予約する</a>
+        <a class="btn btn-ghost js-tel" href="#">電話する</a>
+      </div>
+      <div class="open-now"><span class="dot" id="nowDot"></span><span id="nowText">営業時間を確認中…</span></div>
+    </div>
+    <div class="hero-art reveal" aria-hidden="true">
+      <div class="light"></div><div class="arch"></div>
+      <div class="mark">GRACE</div>
+      <div class="tag">— a private room, just for you —</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="wrap">
+    <span class="sec-en">Concept</span>
+    <h2 class="sec">あなただけの空間で</h2>
+    <div class="points">
+      <div class="point reveal"><div class="num">01</div><h3>完全個室</h3><p>ほかのお客様と顔を合わせることはありません。ノーメイクでの来店や、小さな悩みの相談も気兼ねなく。</p></div>
+      <div class="point reveal"><div class="num">02</div><h3>はじめから最後までひとりで担当</h3><p>カウンセリングから仕上げまで同じスタイリストが。途中で人が替わらないから、話が早くてぶれません。</p></div>
+      <div class="point reveal"><div class="num">03</div><h3>待ち時間なしの予約制</h3><p>同じ時間帯に予約を重ねないので、待たされることも急かされることもありません。</p></div>
+    </div>
+    <p class="quote reveal">「美容室の、あのざわざわが少し苦手」<br>そんな方にこそ、来ていただきたいサロンです。</p>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" style="padding-top:20px">
+  <div class="wrap">
+    <span class="sec-en">Menu</span>
+    <h2 class="sec">メニュー</h2>
+    <div class="menu-list" id="menuList"></div>
+    <p class="note">表示価格は税込です。髪の長さ・状態により変わる場合があります。</p>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<section id="reserve">
+  <div class="wrap">
+    <span class="sec-en">Reservation</span>
+    <h2 class="sec">ご予約</h2>
+    <p class="lead">3ステップ・1分ほどで完了します。<br>内容を確認のうえ、お店からご連絡して予約確定となります。</p>
+
+    <div class="bk">
+      <div class="steps"><span class="on"></span><span></span><span></span><span></span></div>
+
+      <!-- step1 -->
+      <div class="panel" data-step="1">
+        <h3>メニューを選ぶ<small>複数選択できます</small></h3>
+        <div class="opts" id="bkMenu"></div>
+        <div class="nav-row"><button class="btn btn-main" id="to2" disabled>日時を選ぶ</button></div>
+      </div>
+
+      <!-- step2 -->
+      <div class="panel hidden" data-step="2">
+        <h3>日にちを選ぶ</h3>
+        <div class="days" id="bkDays"></div>
+        <h3 style="margin-top:14px">時間を選ぶ<small id="durText"></small></h3>
+        <div class="times" id="bkTimes"><p class="hint">先に日にちを選んでください。</p></div>
+        <div class="nav-row"><button class="btn btn-ghost" data-back="1">戻る</button><button class="btn btn-main" id="to3" disabled>お客様情報へ</button></div>
+      </div>
+
+      <!-- step3 -->
+      <div class="panel hidden" data-step="3">
+        <h3>お客様情報</h3>
+        <div class="field"><label for="fName">お名前<span class="req">必須</span></label><input id="fName" autocomplete="name" placeholder="富谷 花子"></div>
+        <div class="field"><label for="fTel">電話番号<span class="req">必須</span></label><input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="090-1234-5678"></div>
+        <div class="field"><label for="fFirst">ご来店</label>
+          <select id="fFirst"><option>はじめて</option><option>2回目以上</option></select></div>
+        <div class="field"><label for="fNote">ご要望・お悩み（任意）</label><textarea id="fNote" rows="3" placeholder="例：前髪だけ短めに／頭皮の乾燥が気になる など"></textarea></div>
+        <div class="nav-row"><button class="btn btn-ghost" data-back="2">戻る</button><button class="btn btn-main" id="to4" disabled>確認へ</button></div>
+      </div>
+
+      <!-- step4 -->
+      <div class="panel hidden" data-step="4">
+        <h3>ご予約内容の確認</h3>
+        <div class="summary"><dl id="sumList"></dl></div>
+        <div class="send" id="sendBox"></div>
+        <p class="hint" id="sendHint"></p>
+        <div class="nav-row"><button class="btn btn-ghost" data-back="3">修正する</button></div>
+      </div>
+
+      <div class="panel hidden" data-step="5">
+        <div class="done"><div class="ic">✓</div>
+          <h3 class="min" style="font-size:20px">ご予約リクエストを受け付けました</h3>
+          <p class="hint">お店からのご連絡をもって予約確定となります。<br>ご来店を心よりお待ちしております。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips">
+  <div class="wrap">
+    <span class="sec-en">Care Tips</span>
+    <h2 class="sec">髪とお肌のプチ情報</h2>
+    <p class="lead">おうちで今日からできる、ちょっとしたケアのコツ。</p>
+    <div class="today-tip reveal" id="seasonTip"></div>
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-cat="hair" role="tab">髪のケア</button>
+      <button class="tab" data-cat="skin" role="tab">肌のケア</button>
+    </div>
+    <div class="tips" id="tipList"></div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment" style="padding-top:24px">
+  <div class="wrap">
+    <span class="sec-en">Payment</span>
+    <h2 class="sec">お支払い方法</h2>
+    <div class="pays">
+      <div class="pay reveal"><div class="pi" style="background:#fde8e8"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e0002a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18h4"/></svg></div><b>PayPay</b><small>QRコード決済</small></div>
+      <div class="pay reveal"><div class="pi" style="background:#e6edf7"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#33508a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/></svg></div><b>クレジット<br>カード</b><small>各種ブランド</small></div>
+      <div class="pay reveal"><div class="pi" style="background:#e9f1e6"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4f7d5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></div><b>現金</b><small>&nbsp;</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access">
+  <div class="wrap">
+    <span class="sec-en">Access</span>
+    <h2 class="sec">店舗情報・アクセス</h2>
+    <div class="acc">
+      <div class="info reveal"><dl id="infoList"></dl></div>
+      <div class="map reveal"><iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="美容室GRACEの地図"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<!-- U-TOMIYA -->
+<section class="uto" id="nearby">
+  <div class="wrap">
+    <span class="sec-en">After your visit</span>
+    <h2 class="sec">帰りに、ユートミヤへお立ち寄り</h2>
+    <p class="lead">GRACEのすぐ近くには、富谷市複合図書館「ユートミヤ」。きれいになった帰り道に、ちょっと寄り道はいかがですか。</p>
+    <div class="uto-card reveal">
+      <div class="uto-art" aria-hidden="true">
+        <svg width="150" height="120" viewBox="0 0 150 120" fill="none">
+          <rect x="18" y="44" width="114" height="60" rx="6" fill="#fffdfa"/>
+          <path d="M10 48 75 14l65 34" stroke="#b0645a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="34" y="60" width="20" height="44" rx="3" fill="#e9d6c9"/>
+          <rect x="64" y="60" width="22" height="18" rx="3" fill="#cfe0ea"/><rect x="96" y="60" width="22" height="18" rx="3" fill="#cfe0ea"/>
+          <path d="M98 104c0-9 6-14 12-14s12 5 12 14" fill="#b89a6a"/>
+          <circle cx="110" cy="86" r="5" fill="#b0645a"/>
+        </svg>
+      </div>
+      <div class="uto-body">
+        <h3>ユートミヤ（富谷市複合図書館）</h3>
+        <p class="sm">富谷市成田1丁目1-1（成田市民センターとなり）</p>
+        <ul>
+          <li><span>🍰</span>スイーツステーション — 富谷産の素材を使った“とみやスイーツ”やカフェでひと休み</li>
+          <li><span>📚</span>市民図書館 — 吹き抜けのゆったりした空間で読書を</li>
+          <li><span>🧸</span>とみのわパーク — お子さま連れにうれしい屋内遊び場</li>
+        </ul>
+        <p class="sm">開館時間はおおむね9:00〜21:00（年末年始を除く）。最新情報は富谷市の公式サイトでご確認ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="en">GRACE</div>
+  <p style="margin-top:6px">美容室グレース ｜ 宮城県富谷市成田</p>
+  <p style="margin-top:18px;opacity:.6">© <span id="yr"></span> Hair Salon GRACE</p>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a class="btn btn-ghost js-tel" href="#" aria-label="電話する">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+  </a>
+  <a href="#reserve" class="btn btn-main">ネットで予約する</a>
+</div>
+
+<script>
+/* =========================================================
+   ★ お店の情報はここだけ書き換えればOK ★
+   ========================================================= */
+const CONFIG = {
+  shopName: "美容室GRACE",
+  tel: "022-778-2454",
+  address: "〒981-3341 宮城県富谷市成田1丁目4-105",
+  openTime: "09:00",          // ※開店時間（要確認）
+  closeTime: "18:00",         // 閉店時間
+  closedWeekdays: [1],        // ※定休日（0=日,1=月,2=火…）要確認。例: 月曜休み→[1]
+  closedDates: [],            // 臨時休業日 例: ["2026-11-03","2026-12-31"]
+  holidayText: "月曜日（※要確認）",
+  parking: "あり（※台数は要確認）",
+  slotMinutes: 30,            // 予約枠の刻み
+  daysAhead: 30,              // 何日先まで予約できるか
+  sameDayCutoffMin: 60,       // 当日予約は何分後から受け付けるか
+
+  // --- 予約の受け取り方（使うものだけ入れる。空欄なら非表示） ---
+  formEndpoint: "",           // Formspree等のURL（例 "https://formspree.io/f/xxxxxx"）→ ネットで送信できる
+  lineUrl: "",                // LINE公式アカウントの友だち追加URL（例 "https://lin.ee/xxxx"）
+  email: "",                  // 予約受付メールアドレス
+
+  // --- メニュー（価格・時間は仮です。必ず書き換えてください） ---
+  menu: [
+    { name:"カット",                 desc:"シャンプー・ブロー込み",               price:"¥4,400〜", min:60 },
+    { name:"カラー",                 desc:"根元リタッチ／全体",                   price:"¥6,600〜", min:90 },
+    { name:"パーマ",                 desc:"カット別",                             price:"¥7,700〜", min:120 },
+    { name:"縮毛矯正",               desc:"クセ・うねりをまっすぐに",             price:"¥13,200〜", min:150 },
+    { name:"トリートメント",         desc:"髪の内側から補修",                     price:"¥2,200〜", min:30 },
+    { name:"ヘッドスパ",             desc:"頭皮すっきり、リラックス",             price:"¥3,300〜", min:30 },
+    { name:"顔そり・フェイスケア",   desc:"肌のトーンアップ・保湿",               price:"¥2,750〜", min:30 },
+  ],
+};
+/* ========================================================= */
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const telHref = "tel:" + CONFIG.tel.replace(/[^\d+]/g,"");
+$$(".js-tel").forEach(a => a.href = telHref);
+$("#yr").textContent = new Date().getFullYear();
+const toMin = t => { const [h,m] = t.split(":").map(Number); return h*60+m; };
+const fmt = m => `${Math.floor(m/60)}:${String(m%60).padStart(2,"0")}`;
+const WD = ["日","月","火","水","木","金","土"];
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const isClosed = d => CONFIG.closedWeekdays.includes(d.getDay()) || CONFIG.closedDates.includes(ymd(d));
+
+/* open now */
+(function(){
+  const n = new Date(), cur = n.getHours()*60+n.getMinutes();
+  const open = !isClosed(n) && cur >= toMin(CONFIG.openTime) && cur < toMin(CONFIG.closeTime);
+  $("#nowDot").classList.toggle("on", open);
+  $("#nowText").textContent = open ? `営業中 ・ 本日 ${CONFIG.closeTime} まで` : `営業時間 ${CONFIG.openTime}〜${CONFIG.closeTime}`;
+})();
+
+/* menu list */
+$("#menuList").innerHTML = CONFIG.menu.map(m =>
+  `<div class="mi"><div><h4>${m.name}</h4><p>${m.desc}</p></div><div class="pr">${m.price}<small>約${m.min}分</small></div></div>`).join("");
+
+/* info */
+$("#infoList").innerHTML = `
+  <dt>住所</dt><dd>${CONFIG.address}</dd>
+  <dt>電話</dt><dd><a href="${telHref}">${CONFIG.tel}</a></dd>
+  <dt>営業時間</dt><dd>${CONFIG.openTime}〜${CONFIG.closeTime}</dd>
+  <dt>定休日</dt><dd>${CONFIG.holidayText}</dd>
+  <dt>駐車場</dt><dd>${CONFIG.parking}</dd>
+  <dt>お支払い</dt><dd>PayPay／クレジットカード／現金</dd>
+  <dt>席数</dt><dd>完全個室 1席（1名様ずつのご案内）</dd>`;
+$("#mapFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(CONFIG.address + " 美容室GRACE") + "&output=embed";
+
+/* ---------- booking ---------- */
+const st = { menus:new Set(), date:null, time:null };
+const dur = () => [...st.menus].reduce((s,i)=>s+CONFIG.menu[i].min,0);
+function go(n){
+  $$(".panel").forEach(p => p.classList.toggle("hidden", +p.dataset.step !== n));
+  $$(".steps span").forEach((s,i) => s.classList.toggle("on", i < Math.min(n,4)));
+  if (n !== 1) document.getElementById("reserve").scrollIntoView({behavior:"smooth"});
+}
+$$("[data-back]").forEach(b => b.onclick = () => go(+b.dataset.back));
+
+$("#bkMenu").innerHTML = CONFIG.menu.map((m,i) =>
+  `<button class="opt" data-i="${i}"><span><b>${m.name}</b><small>${m.desc}・約${m.min}分</small></span><span>${m.price}</span></button>`).join("");
+$$("#bkMenu .opt").forEach(b => b.onclick = () => {
+  const i = +b.dataset.i;
+  st.menus.has(i) ? st.menus.delete(i) : st.menus.add(i);
+  b.classList.toggle("sel"); $("#to2").disabled = !st.menus.size;
+});
+$("#to2").onclick = () => { st.time = null; renderDays(); go(2); };
+
+function renderDays(){
+  const box = $("#bkDays"); box.innerHTML = "";
+  const today = new Date(); today.setHours(0,0,0,0);
+  for (let i=0;i<CONFIG.daysAhead;i++){
+    const d = new Date(today); d.setDate(today.getDate()+i);
+    const b = document.createElement("button");
+    b.className = "day" + (d.getDay()===0?" sun":d.getDay()===6?" sat":"");
+    b.innerHTML = `<div class="w">${i===0?"今日":WD[d.getDay()]}</div><div class="d">${d.getDate()}</div><div class="m">${d.getMonth()+1}月</div>`;
+    const noSlot = slots(d).length === 0;
+    b.disabled = isClosed(d) || noSlot;
+    if (st.date && ymd(st.date)===ymd(d)) b.classList.add("sel");
+    b.onclick = () => { st.date = d; st.time = null; $$(".day").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); renderTimes(); };
+    box.appendChild(b);
+  }
+  $("#durText").textContent = `所要 約${dur()}分`;
+  st.date ? renderTimes() : ($("#bkTimes").innerHTML = '<p class="hint">先に日にちを選んでください。</p>');
+  $("#to3").disabled = true;
+}
+function slots(d){
+  const out = [], start = toMin(CONFIG.openTime), last = toMin(CONFIG.closeTime) - dur();
+  const now = new Date(), isToday = ymd(d)===ymd(now), nowMin = now.getHours()*60+now.getMinutes()+CONFIG.sameDayCutoffMin;
+  for (let m=start; m<=last; m+=CONFIG.slotMinutes){ if (!isToday || m >= nowMin) out.push(m); }
+  return out;
+}
+function renderTimes(){
+  const s = slots(st.date);
+  $("#bkTimes").innerHTML = s.length ? "" : '<p class="hint">この日は受付できる時間がありません。</p>';
+  s.forEach(m => {
+    const b = document.createElement("button"); b.className="time"; b.textContent = fmt(m);
+    b.onclick = () => { st.time = m; $$(".time").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); $("#to3").disabled=false; };
+    $("#bkTimes").appendChild(b);
+  });
+}
+$("#to3").onclick = () => go(3);
+const chk3 = () => $("#to4").disabled = !($("#fName").value.trim() && $("#fTel").value.replace(/\D/g,"").length >= 10);
+["#fName","#fTel"].forEach(s => $(s).addEventListener("input", chk3));
+try { const p = JSON.parse(localStorage.getItem("grace_me")||"{}"); if(p.n){$("#fName").value=p.n;$("#fTel").value=p.t;chk3();} } catch(e){}
+
+function bookingText(){
+  const d = st.date;
+  return [
+    `【${CONFIG.shopName} ご予約希望】`,
+    `メニュー：${[...st.menus].map(i=>CONFIG.menu[i].name).join("、")}`,
+    `希望日時：${d.getMonth()+1}月${d.getDate()}日(${WD[d.getDay()]}) ${fmt(st.time)}〜（約${dur()}分）`,
+    `お名前：${$("#fName").value.trim()}`,
+    `電話：${$("#fTel").value.trim()}`,
+    `ご来店：${$("#fFirst").value}`,
+    `ご要望：${$("#fNote").value.trim() || "なし"}`,
+  ].join("\n");
+}
+$("#to4").onclick = () => {
+  try { localStorage.setItem("grace_me", JSON.stringify({n:$("#fName").value.trim(), t:$("#fTel").value.trim()})); } catch(e){}
+  const d = st.date;
+  $("#sumList").innerHTML = `
+    <dt>メニュー</dt><dd>${[...st.menus].map(i=>CONFIG.menu[i].name).join("、")}</dd>
+    <dt>日時</dt><dd>${d.getMonth()+1}月${d.getDate()}日(${WD[d.getDay()]}) ${fmt(st.time)}〜</dd>
+    <dt>所要</dt><dd>約${dur()}分</dd>
+    <dt>お名前</dt><dd>${esc($("#fName").value)} 様</dd>
+    <dt>電話</dt><dd>${esc($("#fTel").value)}</dd>
+    <dt>ご要望</dt><dd>${esc($("#fNote").value) || "なし"}</dd>`;
+  const txt = bookingText(), box = $("#sendBox"); box.innerHTML = "";
+  const add = (html, fn) => { const el = document.createElement(fn?"button":"a"); el.className="btn btn-main"; el.innerHTML=html; if(fn) el.onclick=fn; box.appendChild(el); return el; };
+  if (CONFIG.formEndpoint) add("この内容で予約を送信する", async (e) => {
+    e.target.disabled = true; e.target.textContent = "送信中…";
+    try {
+      const r = await fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({message:txt,_subject:"【GRACE】ネット予約"})});
+      if(!r.ok) throw 0; go(5);
+    } catch(_){ e.target.disabled=false; e.target.textContent="もう一度送信する"; $("#sendHint").textContent="送信できませんでした。お手数ですがお電話でご予約ください。"; }
+  });
+  if (CONFIG.lineUrl) { const a = add("LINEで送る"); a.href = CONFIG.lineUrl; a.target="_blank"; a.style.background="#06c755"; a.onclick=()=>copy(txt,true); }
+  if (CONFIG.email) { const a = add("メールで送る"); a.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent("ご予約希望")}&body=${encodeURIComponent(txt)}`; }
+  const t = add("電話で予約する"); t.href = telHref;
+  if (CONFIG.formEndpoint || CONFIG.lineUrl || CONFIG.email) t.className = "btn btn-ghost";
+  const c = document.createElement("button"); c.className="btn btn-ghost"; c.textContent="予約内容をコピー"; c.onclick=()=>copy(txt); box.appendChild(c);
+  $("#sendHint").textContent = CONFIG.formEndpoint ? "送信後、お店からのご連絡で予約確定となります。"
+    : CONFIG.lineUrl ? "「LINEで送る」を押すと内容がコピーされます。トークに貼り付けて送信してください。"
+    : "お電話の際は、この画面を見ながらお伝えいただくとスムーズです。";
+  go(4);
+};
+function copy(t, silent){
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(()=>{ if(!silent) $("#sendHint").textContent="予約内容をコピーしました。"; }).catch(()=>{});
+}
+function esc(s){ return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+/* ---------- tips ---------- */
+const TIPS = {
+  hair: [
+    ["💨","ドライヤーは「根元から」","毛先から乾かすと、毛先だけ乾きすぎてパサつきの原因に。根元→中間→毛先の順で、最後に冷風をあてるとツヤが出てまとまりやすくなります。"],
+    ["🧺","タオルは「こすらず、はさむ」","濡れた髪はとてもデリケート。ゴシゴシこすらず、タオルで髪をはさんでポンポンと押さえるように水気をとりましょう。"],
+    ["🪮","シャンプー前にブラッシング","乾いた状態で軽くとかしておくと、絡まりやほこりが落ちて泡立ちがアップ。シャンプーの量も少なくてすみます。"],
+    ["🌙","濡れたまま寝ないで","髪は濡れているとき表面が開いた状態。そのまま寝ると枕との摩擦で傷みやすくなります。夜はしっかり乾かしてから。"],
+    ["👐","1日1分の頭皮マッサージ","指の腹で頭皮を下から上へゆっくり動かすだけ。シャンプー中に行うと血行がよくなり、すっきり気持ちいい習慣に。"],
+    ["☀️","髪にも紫外線対策を","髪も日焼けします。カラーの色あせやパサつきが気になる方は、帽子や日傘、髪用UVスプレーを取り入れてみて。"],
+  ],
+  skin: [
+    ["💧","洗顔は「ぬるま湯」で","熱いお湯は肌のうるおいまで落としてしまいます。32〜34℃くらいの、少しぬるいと感じる温度がちょうどいい目安です。"],
+    ["⏱️","保湿はお風呂あがりすぐ","入浴後の肌は急速に乾燥していきます。タオルで押さえたら、なるべく早めに化粧水・乳液でふたをしましょう。"],
+    ["🧴","日焼け止めは冬もくもりの日も","紫外線は季節や天気に関係なく届いています。毎朝の保湿のあとに、日焼け止めをひと塗りする習慣を。"],
+    ["🛏️","枕カバーはこまめに交換","毎晩肌がふれる枕カバーは、意外と皮脂やほこりがたまりがち。週に1〜2回の交換で肌あれ予防に。"],
+    ["💋","唇も保湿を忘れずに","唇は皮脂腺が少なく乾燥しやすいパーツ。なめるとかえって乾くので、リップクリームでこまめにケアしましょう。"],
+    ["🥤","内側からのうるおいも","肌のうるおいには水分補給も大切。のどが渇く前に、こまめにお水や白湯を飲むのがおすすめです。"],
+  ],
+};
+const SEASON = {
+  spring:["春のケア","花粉や寒暖差でゆらぎやすい季節。帰宅したら髪を軽くブラッシングして花粉を落とし、肌はやさしく洗ってたっぷり保湿を。"],
+  summer:["夏のケア","紫外線と汗、エアコンの乾燥が重なる季節。髪用UVスプレーと、汗をかいたあとのこまめなケアで、秋のダメージを防ぎましょう。"],
+  autumn:["秋のケア","夏の紫外線ダメージが出やすく、抜け毛が気になる方も多い時期。ヘッドスパやトリートメントで、頭皮と髪をいたわってあげましょう。"],
+  winter:["冬のケア","空気が乾燥し、静電気や肌のつっぱりが起きやすい季節。お部屋の加湿と、洗い流さないトリートメント・保湿クリームが味方です。"],
+};
+(function(){
+  const m = new Date().getMonth()+1;
+  const k = m>=3&&m<=5?"spring":m>=6&&m<=8?"summer":m>=9&&m<=11?"autumn":"winter";
+  $("#seasonTip").innerHTML = `<div class="lbl">This month · ${m}月</div><h3>${SEASON[k][0]}</h3><p>${SEASON[k][1]}</p>`;
+})();
+function renderTips(cat){
+  $("#tipList").innerHTML = TIPS[cat].map(([ic,t,b],i)=>
+    `<details class="tip"${i===0?" open":""}><summary><span class="ico">${ic}</span>${t}<span class="chev">▾</span></summary><div class="body">${b}</div></details>`).join("");
+}
+$$(".tab").forEach(b => b.onclick = () => { $$(".tab").forEach(x=>x.classList.remove("on")); b.classList.add("on"); renderTips(b.dataset.cat); });
+renderTips("hair");
+
+/* ---------- ui ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }), {threshold:.12});
+$$(".reveal").forEach(el => io.observe(el));
+const rs = $("#reserve");
+addEventListener("scroll", () => {
+  $("#hd").classList.toggle("scrolled", scrollY > 8);
+  const r = rs.getBoundingClientRect();
+  $("#sticky").classList.toggle("hide", r.top < innerHeight*.6 && r.bottom > 120);
+}, {passive:true});
+</script>
+</body>
+</html>

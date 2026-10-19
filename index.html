@@ -129,6 +129,22 @@ nav.pc a:hover{color:var(--ink)}
 .done{text-align:center;padding:20px 0}
 .done .ic{width:56px;height:56px;border-radius:50%;background:var(--rose-soft);color:var(--rose);display:grid;place-items:center;margin:0 auto 12px;font-size:26px}
 .hint{font-size:12.5px;color:var(--sub);margin-top:10px;line-height:1.7}
+.live{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--sub);background:var(--bg);border-radius:12px;padding:8px 12px;margin-bottom:16px}
+.live .dot{flex:0 0 8px}
+.live button{margin-left:auto;border:none;background:none;color:var(--rose);font:inherit;font-weight:700;cursor:pointer;padding:2px 4px}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--sub);margin:-6px 0 8px}
+.day .mk{font-size:14px;font-weight:700;line-height:1.3}
+.mk.o{color:var(--ok)}.mk.t{color:#c08a2d}.mk.x{color:#b5a9a2}
+.time small{display:block;font-size:10px;font-weight:400;line-height:1.1}
+.time.full{background:var(--bg);color:#b5a9a2;border-color:transparent;padding:6px 0}
+.time.full:disabled{opacity:1}
+.alert{background:#fbeceb;color:#9a3f36;border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:14px;line-height:1.7}
+.demo-note{background:#fff6df;color:#7a5a12;border:1px dashed #e0c27a;border-radius:12px;padding:10px 14px;font-size:12.5px;margin-bottom:16px;line-height:1.7}
+.skel{flex:0 0 62px;height:78px;border-radius:14px;background:linear-gradient(90deg,#f1ebe4,#faf6f1,#f1ebe4);background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+.done dl{display:grid;grid-template-columns:84px 1fr;gap:6px 10px;text-align:left;background:var(--bg);border-radius:14px;padding:16px 18px;margin:18px 0;font-size:14.5px}
+.done dt{color:var(--sub)}
+.bid{font-family:"Cormorant Garamond",serif;letter-spacing:.12em;font-size:19px;font-weight:600;color:var(--cocoa)}
 .hidden{display:none!important}
 
 /* tips */
@@ -253,10 +269,11 @@ footer .en{font-size:30px;color:#f5ece3;letter-spacing:.2em}
   <div class="wrap">
     <span class="sec-en">Reservation</span>
     <h2 class="sec">ご予約</h2>
-    <p class="lead">3ステップ・1分ほどで完了します。<br>内容を確認のうえ、お店からご連絡して予約確定となります。</p>
+    <p class="lead">空き状況をリアルタイムで確認して、<br>その場でご予約が確定します。</p>
 
     <div class="bk">
       <div class="steps"><span class="on"></span><span></span><span></span><span></span></div>
+      <div class="demo-note hidden" id="demoNote">デモ表示中：まだお店の予約台帳とつながっていないため、空き状況は見本です。ご予約はお電話でお願いします。</div>
 
       <!-- step1 -->
       <div class="panel" data-step="1">
@@ -267,7 +284,11 @@ footer .en{font-size:30px;color:#f5ece3;letter-spacing:.2em}
 
       <!-- step2 -->
       <div class="panel hidden" data-step="2">
+        <div class="live"><span class="dot on"></span><span id="liveText">空き状況を確認中…</span><button type="button" id="liveRefresh">↻ 更新</button></div>
+        <div class="alert hidden" id="takenMsg"></div>
+        <div class="alert hidden" id="loadErr">空き状況を読み込めませんでした。電波の良い場所で「更新」を押すか、お電話でご予約ください。</div>
         <h3>日にちを選ぶ</h3>
+        <div class="legend"><span><b class="mk o">○</b> 空きあり</span><span><b class="mk t">△</b> 残りわずか</span><span><b class="mk x">×</b> 満席・休み</span></div>
         <div class="days" id="bkDays"></div>
         <h3 style="margin-top:14px">時間を選ぶ<small id="durText"></small></h3>
         <div class="times" id="bkTimes"><p class="hint">先に日にちを選んでください。</p></div>
@@ -279,6 +300,7 @@ footer .en{font-size:30px;color:#f5ece3;letter-spacing:.2em}
         <h3>お客様情報</h3>
         <div class="field"><label for="fName">お名前<span class="req">必須</span></label><input id="fName" autocomplete="name" placeholder="富谷 花子"></div>
         <div class="field"><label for="fTel">電話番号<span class="req">必須</span></label><input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="090-1234-5678"></div>
+        <div class="field"><label for="fMail">メールアドレス（任意・予約確認メールが届きます）</label><input id="fMail" type="email" inputmode="email" autocomplete="email" placeholder="example@mail.com"></div>
         <div class="field"><label for="fFirst">ご来店</label>
           <select id="fFirst"><option>はじめて</option><option>2回目以上</option></select></div>
         <div class="field"><label for="fNote">ご要望・お悩み（任意）</label><textarea id="fNote" rows="3" placeholder="例：前髪だけ短めに／頭皮の乾燥が気になる など"></textarea></div>
@@ -289,15 +311,20 @@ footer .en{font-size:30px;color:#f5ece3;letter-spacing:.2em}
       <div class="panel hidden" data-step="4">
         <h3>ご予約内容の確認</h3>
         <div class="summary"><dl id="sumList"></dl></div>
-        <div class="send" id="sendBox"></div>
+        <div class="send">
+          <button class="btn btn-main" id="confirmBtn">この内容で予約を確定する</button>
+          <a class="btn btn-ghost js-tel" href="#">お電話で予約する</a>
+        </div>
         <p class="hint" id="sendHint"></p>
         <div class="nav-row"><button class="btn btn-ghost" data-back="3">修正する</button></div>
       </div>
 
       <div class="panel hidden" data-step="5">
         <div class="done"><div class="ic">✓</div>
-          <h3 class="min" style="font-size:20px">ご予約リクエストを受け付けました</h3>
-          <p class="hint">お店からのご連絡をもって予約確定となります。<br>ご来店を心よりお待ちしております。</p>
+          <h3 class="min" style="font-size:20px">ご予約が確定しました</h3>
+          <dl id="doneList"></dl>
+          <div class="send"><a class="btn btn-main" id="calLink" target="_blank" rel="noopener">Googleカレンダーに追加</a></div>
+          <p class="hint">この画面をスクリーンショットで保存しておくと安心です。<br>変更・キャンセルはお電話でご連絡ください。<br>お帰りには、近くのユートミヤでひと休みもどうぞ。</p>
         </div>
       </div>
     </div>
@@ -407,10 +434,10 @@ const CONFIG = {
   daysAhead: 30,              // 何日先まで予約できるか
   sameDayCutoffMin: 60,       // 当日予約は何分後から受け付けるか
 
-  // --- 予約の受け取り方（使うものだけ入れる。空欄なら非表示） ---
-  formEndpoint: "",           // Formspree等のURL（例 "https://formspree.io/f/xxxxxx"）→ ネットで送信できる
-  lineUrl: "",                // LINE公式アカウントの友だち追加URL（例 "https://lin.ee/xxxx"）
-  email: "",                  // 予約受付メールアドレス
+  // --- リアルタイム予約（Googleスプレッドシートの予約台帳とつなぐ） ---
+  apiUrl: "",                 // Apps ScriptのウェブアプリURL（https://script.google.com/macros/s/xxxx/exec）。空欄だとデモ表示
+  bufferMin: 15,              // 前のお客様との間にとる準備時間（分）
+  // ※ apiUrl を入れると、営業時間・定休日・準備時間は Apps Script 側の設定が優先されます
 
   // --- メニュー（価格・時間は仮です。必ず書き換えてください） ---
   menu: [
@@ -436,35 +463,96 @@ const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-$
 const isClosed = d => CONFIG.closedWeekdays.includes(d.getDay()) || CONFIG.closedDates.includes(ymd(d));
 
 /* open now */
-(function(){
+function renderOpenNow(){
   const n = new Date(), cur = n.getHours()*60+n.getMinutes();
   const open = !isClosed(n) && cur >= toMin(CONFIG.openTime) && cur < toMin(CONFIG.closeTime);
   $("#nowDot").classList.toggle("on", open);
   $("#nowText").textContent = open ? `営業中 ・ 本日 ${CONFIG.closeTime} まで` : `営業時間 ${CONFIG.openTime}〜${CONFIG.closeTime}`;
-})();
+}
+renderOpenNow();
 
 /* menu list */
 $("#menuList").innerHTML = CONFIG.menu.map(m =>
   `<div class="mi"><div><h4>${m.name}</h4><p>${m.desc}</p></div><div class="pr">${m.price}<small>約${m.min}分</small></div></div>`).join("");
 
 /* info */
-$("#infoList").innerHTML = `
+function renderInfo(){ $("#infoList").innerHTML = `
   <dt>住所</dt><dd>${CONFIG.address}</dd>
   <dt>電話</dt><dd><a href="${telHref}">${CONFIG.tel}</a></dd>
   <dt>営業時間</dt><dd>${CONFIG.openTime}〜${CONFIG.closeTime}</dd>
   <dt>定休日</dt><dd>${CONFIG.holidayText}</dd>
   <dt>駐車場</dt><dd>${CONFIG.parking}</dd>
   <dt>お支払い</dt><dd>PayPay／クレジットカード／現金</dd>
-  <dt>席数</dt><dd>完全個室 1席（1名様ずつのご案内）</dd>`;
+  <dt>席数</dt><dd>完全個室 1席（1名様ずつのご案内）</dd>`; }
+renderInfo();
 $("#mapFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(CONFIG.address + " 美容室GRACE") + "&output=embed";
 
-/* ---------- booking ---------- */
-const st = { menus:new Set(), date:null, time:null };
+/* ---------- booking (real-time) ---------- */
+const DEMO = !CONFIG.apiUrl;
+const st = { menus:new Set(), date:null, time:null, booked:{}, loaded:false, at:null, step:1, busy:false };
 const dur = () => [...st.menus].reduce((s,i)=>s+CONFIG.menu[i].min,0);
+const menuNames = () => [...st.menus].map(i=>CONFIG.menu[i].name).join("、");
+const hm = m => `${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+const conflict = (list,s,e) => list.some(([bs,be]) => s < be + CONFIG.bufferMin && bs < e + CONFIG.bufferMin);
+const dateLabel = d => `${d.getMonth()+1}月${d.getDate()}日(${WD[d.getDay()]})`;
+
+/* デモ表示用：ブラウザ内に見本の予約データ */
+let demoBooked = {};
+if (DEMO) {
+  $("#demoNote").classList.remove("hidden");
+  try { demoBooked = JSON.parse(localStorage.getItem("grace_demo")||"null") || {}; } catch(e){}
+  if (!Object.keys(demoBooked).length) {
+    const t = new Date(); t.setHours(0,0,0,0);
+    for (let i=0;i<CONFIG.daysAhead;i++){
+      const d = new Date(t); d.setDate(t.getDate()+i); const n = d.getDate(), s = (n*7)%5*30;
+      demoBooked[ymd(d)] = n%6===0 ? [[540,1080]] : [[600+s,690+s],[840+(n%3)*60,960+(n%3)*60]];
+    }
+  }
+}
+const saveDemo = () => { try { localStorage.setItem("grace_demo", JSON.stringify(demoBooked)); } catch(e){} };
+
+function applySettings(s){
+  if (s.open) CONFIG.openTime = s.open;
+  if (s.close) CONFIG.closeTime = s.close;
+  if (Array.isArray(s.closedWeekdays)) CONFIG.closedWeekdays = s.closedWeekdays;
+  if (s.bufferMin != null) CONFIG.bufferMin = +s.bufferMin;
+  if (s.sameDayCutoffMin != null) CONFIG.sameDayCutoffMin = +s.sameDayCutoffMin;
+  if (s.daysAhead) CONFIG.daysAhead = +s.daysAhead;
+  renderOpenNow(); renderInfo();
+}
+async function fetchAvailability(){
+  const t = new Date(); t.setHours(0,0,0,0);
+  const end = new Date(t); end.setDate(t.getDate()+CONFIG.daysAhead);
+  if (DEMO) { await sleep(300); st.booked = JSON.parse(JSON.stringify(demoBooked)); }
+  else {
+    const r = await fetch(`${CONFIG.apiUrl}?action=availability&from=${ymd(t)}&to=${ymd(end)}&_=${Date.now()}`);
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "api");
+    if (j.settings) applySettings(j.settings);
+    st.booked = j.booked || {};
+  }
+  st.loaded = true; st.at = new Date();
+}
+async function postBooking(p){
+  if (DEMO) {
+    await sleep(600);
+    const list = demoBooked[p.date] || (demoBooked[p.date] = []);
+    const s = toMin(p.start);
+    if (conflict(list, s, s+p.minutes)) return { ok:false, error:"taken" };
+    list.push([s, s+p.minutes]); saveDemo();
+    return { ok:true, id:"DEMO-" + Date.now().toString(36).slice(-4).toUpperCase() };
+  }
+  const r = await fetch(CONFIG.apiUrl, { method:"POST", body:JSON.stringify(p) }); // text/plain → 事前確認なしで送れる
+  return r.json();
+}
+
 function go(n){
+  st.step = n;
   $$(".panel").forEach(p => p.classList.toggle("hidden", +p.dataset.step !== n));
   $$(".steps span").forEach((s,i) => s.classList.toggle("on", i < Math.min(n,4)));
   if (n !== 1) document.getElementById("reserve").scrollIntoView({behavior:"smooth"});
+  if (n === 2) refresh();
 }
 $$("[data-back]").forEach(b => b.onclick = () => go(+b.dataset.back));
 
@@ -475,91 +563,133 @@ $$("#bkMenu .opt").forEach(b => b.onclick = () => {
   st.menus.has(i) ? st.menus.delete(i) : st.menus.add(i);
   b.classList.toggle("sel"); $("#to2").disabled = !st.menus.size;
 });
-$("#to2").onclick = () => { st.time = null; renderDays(); go(2); };
+$("#to2").onclick = () => { $("#takenMsg").classList.add("hidden"); go(2); };
 
-function renderDays(){
-  const box = $("#bkDays"); box.innerHTML = "";
-  const today = new Date(); today.setHours(0,0,0,0);
-  for (let i=0;i<CONFIG.daysAhead;i++){
-    const d = new Date(today); d.setDate(today.getDate()+i);
-    const b = document.createElement("button");
-    b.className = "day" + (d.getDay()===0?" sun":d.getDay()===6?" sat":"");
-    b.innerHTML = `<div class="w">${i===0?"今日":WD[d.getDay()]}</div><div class="d">${d.getDate()}</div><div class="m">${d.getMonth()+1}月</div>`;
-    const noSlot = slots(d).length === 0;
-    b.disabled = isClosed(d) || noSlot;
-    if (st.date && ymd(st.date)===ymd(d)) b.classList.add("sel");
-    b.onclick = () => { st.date = d; st.time = null; $$(".day").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); renderTimes(); };
-    box.appendChild(b);
-  }
-  $("#durText").textContent = `所要 約${dur()}分`;
-  st.date ? renderTimes() : ($("#bkTimes").innerHTML = '<p class="hint">先に日にちを選んでください。</p>');
-  $("#to3").disabled = true;
+async function refresh(){
+  if (st.busy) return; st.busy = true;
+  if (!st.loaded) renderDays();
+  $("#liveText").textContent = "最新の空き状況を確認中…";
+  try { await fetchAvailability(); $("#loadErr").classList.add("hidden"); }
+  catch(e){ $("#loadErr").classList.remove("hidden"); }
+  st.busy = false;
+  renderDays();
 }
-function slots(d){
+$("#liveRefresh").onclick = refresh;
+setInterval(() => { if (st.step === 2 && !document.hidden) refresh(); }, 60000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden && st.step === 2) refresh(); });
+
+const dayOff = d => isClosed(d) || (st.booked[ymd(d)]||[]).some(([s,e]) => s <= 0 && e >= 1440);
+function slotList(d){
   const out = [], start = toMin(CONFIG.openTime), last = toMin(CONFIG.closeTime) - dur();
-  const now = new Date(), isToday = ymd(d)===ymd(now), nowMin = now.getHours()*60+now.getMinutes()+CONFIG.sameDayCutoffMin;
-  for (let m=start; m<=last; m+=CONFIG.slotMinutes){ if (!isToday || m >= nowMin) out.push(m); }
+  const now = new Date(), isToday = ymd(d) === ymd(now), nowMin = now.getHours()*60 + now.getMinutes() + CONFIG.sameDayCutoffMin;
+  const list = st.booked[ymd(d)] || [];
+  for (let m = start; m <= last; m += CONFIG.slotMinutes){
+    if (isToday && m < nowMin) continue;
+    out.push({ m, ok: !conflict(list, m, m + dur()) });
+  }
   return out;
 }
+function renderDays(){
+  const box = $("#bkDays");
+  $("#durText").textContent = `所要 約${dur()}分`;
+  if (!st.loaded){ box.innerHTML = '<div class="skel"></div>'.repeat(6); $("#bkTimes").innerHTML = ""; return; }
+  box.innerHTML = "";
+  const t = new Date(); t.setHours(0,0,0,0);
+  for (let i=0;i<CONFIG.daysAhead;i++){
+    const d = new Date(t); d.setDate(t.getDate()+i);
+    const off = dayOff(d), ok = off ? 0 : slotList(d).filter(x=>x.ok).length;
+    const mk = off ? ["x","休"] : ok === 0 ? ["x","×"] : ok <= 3 ? ["t","△"] : ["o","○"];
+    const b = document.createElement("button");
+    b.className = "day" + (d.getDay()===0?" sun":d.getDay()===6?" sat":"");
+    b.innerHTML = `<div class="w">${i===0?"今日":(i===1||d.getDate()===1)?`${d.getMonth()+1}/${WD[d.getDay()]}`:WD[d.getDay()]}</div><div class="d">${d.getDate()}</div><div class="mk ${mk[0]}">${mk[1]}</div>`;
+    b.setAttribute("aria-label", `${dateLabel(d)} ${off?"休み":ok?"空きあり":"満席"}`);
+    b.disabled = ok === 0;
+    if (st.date && ymd(st.date) === ymd(d)) { if (ok) b.classList.add("sel"); else st.date = null; }
+    b.onclick = () => {
+      st.date = d; st.time = null; $("#takenMsg").classList.add("hidden");
+      $$(".day").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); renderTimes();
+    };
+    box.appendChild(b);
+  }
+  if (st.date) renderTimes();
+  else { $("#bkTimes").innerHTML = '<p class="hint">先に日にちを選んでください。</p>'; st.time = null; $("#to3").disabled = true; }
+  if (st.at) $("#liveText").textContent = `${st.at.getHours()}:${String(st.at.getMinutes()).padStart(2,"0")} 時点の空き状況${DEMO?"（見本）":""}・自動で更新されます`;
+}
 function renderTimes(){
-  const s = slots(st.date);
-  $("#bkTimes").innerHTML = s.length ? "" : '<p class="hint">この日は受付できる時間がありません。</p>';
-  s.forEach(m => {
-    const b = document.createElement("button"); b.className="time"; b.textContent = fmt(m);
-    b.onclick = () => { st.time = m; $$(".time").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); $("#to3").disabled=false; };
-    $("#bkTimes").appendChild(b);
+  const s = slotList(st.date), box = $("#bkTimes");
+  if (st.time != null && !s.some(x => x.ok && x.m === st.time)) {
+    st.time = null;
+    $("#takenMsg").textContent = "選んでいた時間に、ほかのご予約が入りました。別の時間をお選びください。";
+    $("#takenMsg").classList.remove("hidden");
+  }
+  box.innerHTML = s.some(x=>x.ok) ? "" : '<p class="hint">この日は空きがありません。</p>';
+  s.forEach(({m, ok}) => {
+    const b = document.createElement("button");
+    b.className = "time" + (ok ? "" : " full"); b.disabled = !ok;
+    b.innerHTML = ok ? fmt(m) : `${fmt(m)}<small>予約済</small>`;
+    if (ok && st.time === m) b.classList.add("sel");
+    if (ok) b.onclick = () => { st.time = m; $$(".time").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); $("#to3").disabled = false; };
+    box.appendChild(b);
   });
+  $("#to3").disabled = st.time == null;
 }
 $("#to3").onclick = () => go(3);
-const chk3 = () => $("#to4").disabled = !($("#fName").value.trim() && $("#fTel").value.replace(/\D/g,"").length >= 10);
-["#fName","#fTel"].forEach(s => $(s).addEventListener("input", chk3));
-try { const p = JSON.parse(localStorage.getItem("grace_me")||"{}"); if(p.n){$("#fName").value=p.n;$("#fTel").value=p.t;chk3();} } catch(e){}
 
-function bookingText(){
-  const d = st.date;
-  return [
-    `【${CONFIG.shopName} ご予約希望】`,
-    `メニュー：${[...st.menus].map(i=>CONFIG.menu[i].name).join("、")}`,
-    `希望日時：${d.getMonth()+1}月${d.getDate()}日(${WD[d.getDay()]}) ${fmt(st.time)}〜（約${dur()}分）`,
-    `お名前：${$("#fName").value.trim()}`,
-    `電話：${$("#fTel").value.trim()}`,
-    `ご来店：${$("#fFirst").value}`,
-    `ご要望：${$("#fNote").value.trim() || "なし"}`,
-  ].join("\n");
-}
+const mailOk = v => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const chk3 = () => $("#to4").disabled = !($("#fName").value.trim() && $("#fTel").value.replace(/\D/g,"").length >= 10 && mailOk($("#fMail").value.trim()));
+["#fName","#fTel","#fMail"].forEach(s => $(s).addEventListener("input", chk3));
+try { const p = JSON.parse(localStorage.getItem("grace_me")||"{}"); if (p.n) { $("#fName").value = p.n; $("#fTel").value = p.t || ""; $("#fMail").value = p.m || ""; chk3(); } } catch(e){}
+
 $("#to4").onclick = () => {
-  try { localStorage.setItem("grace_me", JSON.stringify({n:$("#fName").value.trim(), t:$("#fTel").value.trim()})); } catch(e){}
-  const d = st.date;
+  try { localStorage.setItem("grace_me", JSON.stringify({ n:$("#fName").value.trim(), t:$("#fTel").value.trim(), m:$("#fMail").value.trim() })); } catch(e){}
   $("#sumList").innerHTML = `
-    <dt>メニュー</dt><dd>${[...st.menus].map(i=>CONFIG.menu[i].name).join("、")}</dd>
-    <dt>日時</dt><dd>${d.getMonth()+1}月${d.getDate()}日(${WD[d.getDay()]}) ${fmt(st.time)}〜</dd>
-    <dt>所要</dt><dd>約${dur()}分</dd>
+    <dt>メニュー</dt><dd>${esc(menuNames())}</dd>
+    <dt>日時</dt><dd>${dateLabel(st.date)} ${fmt(st.time)}〜${fmt(st.time+dur())}</dd>
     <dt>お名前</dt><dd>${esc($("#fName").value)} 様</dd>
     <dt>電話</dt><dd>${esc($("#fTel").value)}</dd>
+    ${$("#fMail").value.trim() ? `<dt>メール</dt><dd>${esc($("#fMail").value)}</dd>` : ""}
     <dt>ご要望</dt><dd>${esc($("#fNote").value) || "なし"}</dd>`;
-  const txt = bookingText(), box = $("#sendBox"); box.innerHTML = "";
-  const add = (html, fn) => { const el = document.createElement(fn?"button":"a"); el.className="btn btn-main"; el.innerHTML=html; if(fn) el.onclick=fn; box.appendChild(el); return el; };
-  if (CONFIG.formEndpoint) add("この内容で予約を送信する", async (e) => {
-    e.target.disabled = true; e.target.textContent = "送信中…";
-    try {
-      const r = await fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({message:txt,_subject:"【GRACE】ネット予約"})});
-      if(!r.ok) throw 0; go(5);
-    } catch(_){ e.target.disabled=false; e.target.textContent="もう一度送信する"; $("#sendHint").textContent="送信できませんでした。お手数ですがお電話でご予約ください。"; }
-  });
-  if (CONFIG.lineUrl) { const a = add("LINEで送る"); a.href = CONFIG.lineUrl; a.target="_blank"; a.style.background="#06c755"; a.onclick=()=>copy(txt,true); }
-  if (CONFIG.email) { const a = add("メールで送る"); a.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent("ご予約希望")}&body=${encodeURIComponent(txt)}`; }
-  const t = add("電話で予約する"); t.href = telHref;
-  if (CONFIG.formEndpoint || CONFIG.lineUrl || CONFIG.email) t.className = "btn btn-ghost";
-  const c = document.createElement("button"); c.className="btn btn-ghost"; c.textContent="予約内容をコピー"; c.onclick=()=>copy(txt); box.appendChild(c);
-  $("#sendHint").textContent = CONFIG.formEndpoint ? "送信後、お店からのご連絡で予約確定となります。"
-    : CONFIG.lineUrl ? "「LINEで送る」を押すと内容がコピーされます。トークに貼り付けて送信してください。"
-    : "お電話の際は、この画面を見ながらお伝えいただくとスムーズです。";
+  $("#sendHint").textContent = DEMO ? "※ いまは見本表示のため、実際の予約にはなりません。" : "";
   go(4);
 };
-function copy(t, silent){
-  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(()=>{ if(!silent) $("#sendHint").textContent="予約内容をコピーしました。"; }).catch(()=>{});
+
+$("#confirmBtn").onclick = async () => {
+  const btn = $("#confirmBtn");
+  btn.disabled = true; btn.textContent = "予約を確定しています…"; $("#sendHint").textContent = "";
+  const p = { action:"book", date:ymd(st.date), start:hm(st.time), minutes:dur(), menu:menuNames(),
+    name:$("#fName").value.trim(), tel:$("#fTel").value.trim(), email:$("#fMail").value.trim(),
+    first:$("#fFirst").value, note:$("#fNote").value.trim() };
+  let r;
+  try { r = await postBooking(p); } catch(e){ r = { ok:false, error:"network" }; }
+  btn.disabled = false; btn.textContent = "この内容で予約を確定する";
+  if (r && r.ok) { showDone(r.id, p); go(5); return; }
+  if (r && r.error === "taken") {
+    st.time = null;
+    $("#takenMsg").textContent = "申し訳ありません。その時間はたった今ほかのご予約が入りました。別の時間をお選びください。";
+    $("#takenMsg").classList.remove("hidden");
+    go(2); return;
+  }
+  $("#sendHint").textContent = (r && r.message) || "通信がうまくいきませんでした。もう一度お試しいただくか、お電話でご予約ください。";
+};
+
+function showDone(id, p){
+  const d = st.date, s = st.time, e = s + p.minutes;
+  $("#doneList").innerHTML = `
+    <dt>予約番号</dt><dd class="bid">${esc(String(id))}</dd>
+    <dt>日時</dt><dd>${dateLabel(d)} ${fmt(s)}〜${fmt(e)}</dd>
+    <dt>メニュー</dt><dd>${esc(p.menu)}</dd>
+    <dt>お名前</dt><dd>${esc(p.name)} 様</dd>`;
+  const c = ymd(d).replace(/-/g,""), t = m => hm(m).replace(":","") + "00";
+  $("#calLink").href = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + "&text=" + encodeURIComponent(`${CONFIG.shopName}（${p.menu}）`)
+    + `&dates=${c}T${t(s)}/${c}T${t(e)}&ctz=Asia/Tokyo`
+    + "&location=" + encodeURIComponent(CONFIG.address)
+    + "&details=" + encodeURIComponent(`予約番号：${id}\n変更・キャンセル：${CONFIG.tel}`);
+  st.menus.clear(); st.time = null; $$("#bkMenu .opt").forEach(b=>b.classList.remove("sel")); $("#to2").disabled = true;
 }
-function esc(s){ return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+if (!DEMO) fetchAvailability().catch(()=>{}); // 営業時間などを先に読み込んでおく
 
 /* ---------- tips ---------- */
 const TIPS = {

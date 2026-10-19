@@ -73,7 +73,7 @@ function doPost(e) {
     sheet_().appendRow([
       Utilities.formatDate(new Date(), TZ, 'yyyy/MM/dd HH:mm'),
       d.date, hm_(s), hm_(en), m,
-      clean_(d.menu, 100), clean_(d.name, 50), clean_(d.tel, 20), clean_(d.email, 100),
+      clean_(d.menu, 100), clean_(d.name, 50), "'" + clean_(d.tel, 20).replace(/^'/, ''), clean_(d.email, 100), // 電話は先頭の0が消えないよう文字として保存
       clean_(d.first, 10), clean_(d.note, 500), '予約', id,
     ]);
     SpreadsheetApp.flush();
